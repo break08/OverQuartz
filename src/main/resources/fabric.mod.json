@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "overquartz",
+	"version": "${version}",
+	"name": "OverQuartz",
+	"description": "Add Quartz ores for overworld",
+	"authors": [
+		"break08"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/overquartz/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.quartz.OverQuartz"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": ">=1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
