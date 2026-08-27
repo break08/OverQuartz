@@ -10,7 +10,7 @@
         },
         "target": {
           "tag": "stone_ore_replaceables",
-          "predicate_type": "minecraft:block_match"
+          "predicate_type": "minecraft:tag_match"
         }
       }
     ]

@@ -1,8 +1,8 @@
 package com.quartz.init;
 
 import com.quartz.OverQuartz;
-import com.quartz.block.DeepslateQuartzOre;
-import com.quartz.block.OverworldQuartzOre;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
@@ -12,6 +12,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 
 public class OverQuartzBlocks {
     public static Block register(Block block, String name, boolean shouldRegisterItem) {
@@ -26,10 +28,38 @@ public class OverQuartzBlocks {
         return Registry.register(BuiltInRegistries.BLOCK, id, block);
     }
 
+    public static final Block OVERWORLD_QUARTZ_ORE = OverQuartzBlocks.register(
+            new Block(
+                    BlockBehaviour.Properties.of()
+                            .sound(SoundType.STONE)
+                            .strength(3f)
+                            .mapColor(MapColor.STONE)
+                            .instrument(NoteBlockInstrument.BASEDRUM)
+                            .requiresCorrectToolForDrops()
+            ),
+
+            "overworld_quartz_ore",
+            true
+    );
+
+    public static final Block DEEPSLATE_QUARTZ_ORE = OverQuartzBlocks.register(
+            new Block(
+                    BlockBehaviour.Properties.of()
+                            .sound(SoundType.DEEPSLATE)
+                            .strength(4.5f)
+                            .mapColor(MapColor.DEEPSLATE)
+                            .instrument(NoteBlockInstrument.BASEDRUM)
+                            .requiresCorrectToolForDrops()
+            ),
+            "deepslate_quartz_ore",
+            true
+    );
+
+
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS).register((itemGroup) -> {
-            itemGroup.accept(OverworldQuartzOre.OVERWORLD_QUARTZ_ORE.asItem());
-            itemGroup.accept(DeepslateQuartzOre.DEEPSLATE_QUARTZ_ORE.asItem());
+            itemGroup.accept(OVERWORLD_QUARTZ_ORE.asItem());
+            itemGroup.accept(DEEPSLATE_QUARTZ_ORE.asItem());
         });
     }
 }

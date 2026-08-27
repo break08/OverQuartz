@@ -1,9 +1,12 @@
 {
   "type": "minecraft:smelting",
-  "experience": 0.5,
-  "cookingtime": 210,
-  "ingredient": "overquartz:deepslate_quartz_ore",
+  "category": "blocks",
+  "ingredient": {
+    "item": "overquartz:deepslate_quartz_ore"
+  },
   "result": {
     "id": "minecraft:quartz"
-  }
+  },
+  "experience": 0.5,
+  "cookingtime": 210
 }
