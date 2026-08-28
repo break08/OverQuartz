@@ -1,9 +1,10 @@
 package com.quartz.init;
 
 import com.quartz.OverQuartz;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,43 +16,53 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 
+import java.util.function.Function;
+
 public class OverQuartzBlocks {
-    public static Block register(Block block, String name, boolean shouldRegisterItem) {
-
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(OverQuartz.MOD_ID, name);
-
+    private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, boolean shouldRegisterItem) {
+        // Create a registry key for the block
+        ResourceKey<Block> blockKey = keyOfBlock(name);
+        // Create the block instance
+        Block block = blockFactory.apply(settings.setId(blockKey));
         if (shouldRegisterItem) {
-            BlockItem blockItem = new BlockItem(block, new Item.Properties());
-            Registry.register(BuiltInRegistries.ITEM, id, blockItem);
+            ResourceKey<Item> itemKey = keyOfItem(name);
+
+            BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey));
+            Registry.register(BuiltInRegistries.ITEM, itemKey, blockItem);
         }
 
-        return Registry.register(BuiltInRegistries.BLOCK, id, block);
+        return Registry.register(BuiltInRegistries.BLOCK, blockKey, block);
     }
 
-    public static final Block OVERWORLD_QUARTZ_ORE = OverQuartzBlocks.register(
-            new Block(
-                    BlockBehaviour.Properties.of()
-                            .sound(SoundType.STONE)
-                            .strength(3f)
-                            .mapColor(MapColor.STONE)
-                            .instrument(NoteBlockInstrument.BASEDRUM)
-                            .requiresCorrectToolForDrops()
-            ),
+    private static ResourceKey<Block> keyOfBlock(String name) {
+        return ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(OverQuartz.MOD_ID, name));
+    }
 
+    private static ResourceKey<Item> keyOfItem(String name) {
+        return ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(OverQuartz.MOD_ID, name));
+    }
+
+    public static final Block OVERWORLD_QUARTZ_ORE = register(
             "overworld_quartz_ore",
+            Block::new,
+            BlockBehaviour.Properties.of()
+                    .sound(SoundType.STONE)
+                    .strength(3f)
+                    .mapColor(MapColor.STONE)
+                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .requiresCorrectToolForDrops(),
             true
     );
 
-    public static final Block DEEPSLATE_QUARTZ_ORE = OverQuartzBlocks.register(
-            new Block(
-                    BlockBehaviour.Properties.of()
-                            .sound(SoundType.DEEPSLATE)
-                            .strength(4.5f)
-                            .mapColor(MapColor.DEEPSLATE)
-                            .instrument(NoteBlockInstrument.BASEDRUM)
-                            .requiresCorrectToolForDrops()
-            ),
+    public static final Block DEEPSLATE_QUARTZ_ORE = register(
             "deepslate_quartz_ore",
+            Block::new,
+            BlockBehaviour.Properties.of()
+                    .sound(SoundType.DEEPSLATE)
+                    .strength(4.5f)
+                    .mapColor(MapColor.DEEPSLATE)
+                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .requiresCorrectToolForDrops(),
             true
     );
 

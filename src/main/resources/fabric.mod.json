@@ -8,8 +8,8 @@
 		"break08"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/overquartz",
+		"sources": "https://github.com/break08/OverQuartz"
 	},
 	"license": "MIT",
 	"icon": "assets/overquartz/icon.png",
@@ -21,9 +21,8 @@
 	},
 	"depends": {
 		"fabricloader": ">=0.19.3",
-		"minecraft": ">=1.21.1",
+		"minecraft": ">=1.21.4",
 		"java": ">=21",
 		"fabric-api": "*"
-	},
-        "accessWidener": "overquartz.classtweaker"
+	}
 }
