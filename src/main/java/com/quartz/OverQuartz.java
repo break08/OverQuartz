@@ -1,10 +1,9 @@
 package com.quartz;
 
 import com.quartz.init.OverQuartzBlocks;
-import com.quartz.OverQuartzWorldgen;
 import net.fabricmc.api.ModInitializer;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,10 +15,10 @@ public class OverQuartz implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		OverQuartzBlocks.initialize();
-                OverQuartzWorldgen.generate();
+		OverQuartzWorldgen.generate();
 	}
 
-	public static ResourceLocation id(String path) {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+	public static Identifier id(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 }
