@@ -1,12 +1,12 @@
 package com.quartz.init;
 
 import com.quartz.OverQuartz;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
@@ -68,9 +68,9 @@ public class OverQuartzBlocks {
 
 
     public static void initialize() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS).register((itemGroup) -> {
-            itemGroup.accept(OVERWORLD_QUARTZ_ORE.asItem());
-            itemGroup.accept(DEEPSLATE_QUARTZ_ORE.asItem());
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register((creativeTab) -> {
+            creativeTab.accept(OVERWORLD_QUARTZ_ORE.asItem());
+            creativeTab.accept(DEEPSLATE_QUARTZ_ORE.asItem());
         });
     }
 }
