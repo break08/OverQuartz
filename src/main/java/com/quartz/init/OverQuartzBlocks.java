@@ -27,7 +27,7 @@ public class OverQuartzBlocks {
         if (shouldRegisterItem) {
             ResourceKey<Item> itemKey = keyOfItem(name);
 
-            BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey));
+            BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey).useBlockDescriptionPrefix());
             Registry.register(BuiltInRegistries.ITEM, itemKey, blockItem);
         }
 
