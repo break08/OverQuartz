@@ -1,12 +1,8 @@
 {
   "type": "minecraft:smelting",
   "category": "blocks",
-  "ingredient": {
-    "item": "overquartz:overworld_quartz_ore"
-  },
-  "result": {
-    "id": "minecraft:quartz"
-  },
+  "ingredient": "overquartz:overworld_quartz_ore",
+  "result": "minecraft:quartz",
   "experience": 0.5,
   "cookingtime": 200
 }
