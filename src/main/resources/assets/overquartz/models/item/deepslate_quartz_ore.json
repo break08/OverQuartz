@@ -1,3 +1,6 @@
 {
-  "parent": "overquartz:block/deepslate_quartz_ore"
+  "model": {
+    "type": "minecraft:model",
+    "model": "overquartz:block/deepslate_quartz_ore"
+  }
 }
