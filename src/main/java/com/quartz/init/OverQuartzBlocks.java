@@ -3,6 +3,7 @@ package com.quartz.init;
 import com.quartz.OverQuartz;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.SoundType;
@@ -19,19 +20,15 @@ import net.minecraft.world.level.material.MapColor;
 import java.util.function.Function;
 
 public class OverQuartzBlocks {
-    private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, boolean shouldRegisterItem) {
-        // Create a registry key for the block
-        ResourceKey<Block> blockKey = keyOfBlock(name);
+    private static Block register(BlockItemId id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties) {
         // Create the block instance
-        Block block = blockFactory.apply(settings.setId(blockKey));
-        if (shouldRegisterItem) {
-            ResourceKey<Item> itemKey = keyOfItem(name);
+        Block block = register(id.block(), blockFactory, properties);
 
-            BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey).useBlockDescriptionPrefix());
-            Registry.register(BuiltInRegistries.ITEM, itemKey, blockItem);
-        }
+        // Create the block item instance
+        BlockItem blockItem = new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix().setId(id.item()));
+        Registry.register(BuiltInRegistries.ITEM, id.item(), blockItem);
 
-        return Registry.register(BuiltInRegistries.BLOCK, blockKey, block);
+        return block;
     }
 
     private static ResourceKey<Block> keyOfBlock(String name) {
