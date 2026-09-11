@@ -1,6 +1,9 @@
 package com.quartz;
 
 import com.quartz.block.OverQuartzBlocks;
+import com.quartz.item.OverQuartzBlockItems;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -21,6 +24,14 @@ public class OverQuartz {
     public OverQuartz(IEventBus modEventBus) {
         modEventBus.addListener(this::commonSetup); NeoForge.EVENT_BUS.register(this);
         OverQuartzBlocks.BLOCKS.register(modEventBus);
+        OverQuartzBlockItems.ITEMS.register(modEventBus);
+    }
+
+    public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
+            event.accept(OverQuartzBlockItems.OVERWORLD_QUARTZ_BLOCK_ITEM.get());
+            event.accept(OverQuartzBlockItems.DEEPSLATE_QUARTZ_BLOCK_ITEM.get());
+        }
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
