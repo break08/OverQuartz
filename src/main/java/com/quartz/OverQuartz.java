@@ -23,6 +23,7 @@ public class OverQuartz {
 
     public OverQuartz(IEventBus modEventBus) {
         modEventBus.addListener(this::commonSetup); NeoForge.EVENT_BUS.register(this);
+	modEventBus.addListener(OverQuartz::buildContents); 
         OverQuartzBlocks.BLOCKS.register(modEventBus);
         OverQuartzBlockItems.ITEMS.register(modEventBus);
     }
