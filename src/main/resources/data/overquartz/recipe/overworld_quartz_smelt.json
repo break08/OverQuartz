@@ -1,9 +1,7 @@
 {
   "type": "minecraft:smelting",
   "category": "blocks",
-  "ingredient": {
-    "item": "overquartz:overworld_quartz_ore"
-  },
+  "ingredient": "overquartz:overworld_quartz_ore",
   "result": {
     "id": "minecraft:quartz"
   },
